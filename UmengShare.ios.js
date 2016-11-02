@@ -67,4 +67,18 @@ export default class UmengShare {
         console.log(resolveAssetSource(imageSource))
         umengClient.presentSnsIconSheetView(content, resolveAssetSource(imageSource));
     }
+
+    static showShareMenuView(title, content, imageSource){
+        umengClient.showShareMenuView(title, content, resolveAssetSource(imageSource));
+    }
 }
+
+
+
+
+
+
+
+
+
+
