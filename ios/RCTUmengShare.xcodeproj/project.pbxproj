@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9AE08C861DC986BC0082BF80 /* UMSocialCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE08C841DC986BC0082BF80 /* UMSocialCore.framework */; };
+		9AE08C871DC986BC0082BF80 /* UMSocialNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE08C851DC986BC0082BF80 /* UMSocialNetwork.framework */; };
 		F111F3C61CE566070081ADC9 /* RCTUmengShare.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F111F3C51CE566070081ADC9 /* RCTUmengShare.h */; };
 		F111F3C81CE566070081ADC9 /* RCTUmengShare.m in Sources */ = {isa = PBXBuildFile; fileRef = F111F3C71CE566070081ADC9 /* RCTUmengShare.m */; };
 /* End PBXBuildFile section */
@@ -25,6 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9AE08C841DC986BC0082BF80 /* UMSocialCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMSocialCore.framework; path = RCTUmengShare/UmengShare/UMSocialSDK/UMSocialCore.framework; sourceTree = "<group>"; };
+		9AE08C851DC986BC0082BF80 /* UMSocialNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMSocialNetwork.framework; path = RCTUmengShare/UmengShare/UMSocialSDK/UMSocialNetwork.framework; sourceTree = "<group>"; };
 		F111F3C21CE566070081ADC9 /* libRCTUmengShare.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTUmengShare.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F111F3C51CE566070081ADC9 /* RCTUmengShare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTUmengShare.h; sourceTree = "<group>"; };
 		F111F3C71CE566070081ADC9 /* RCTUmengShare.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTUmengShare.m; sourceTree = "<group>"; };
@@ -35,16 +39,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AE08C871DC986BC0082BF80 /* UMSocialNetwork.framework in Frameworks */,
+				9AE08C861DC986BC0082BF80 /* UMSocialCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9AE08C831DC9868D0082BF80 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				9AE08C841DC986BC0082BF80 /* UMSocialCore.framework */,
+				9AE08C851DC986BC0082BF80 /* UMSocialNetwork.framework */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
 		F111F3B91CE566070081ADC9 = {
 			isa = PBXGroup;
 			children = (
 				F111F3C41CE566070081ADC9 /* RCTUmengShare */,
+				9AE08C831DC9868D0082BF80 /* Libraries */,
 				F111F3C31CE566070081ADC9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -218,6 +234,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RCTUmengShare/UmengSocial/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/RCTUmengShare/UmengShare/UMSocialSDK",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../react-native/React/**",
@@ -242,6 +259,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RCTUmengShare/UmengSocial/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/RCTUmengShare/UmengShare/UMSocialSDK",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../react-native/React/**",

@@ -1,21 +1,11 @@
-//
-//  RCTUmengShare.m
-//  RCTUmengShare
-//
-//  Created by 李响 on 16/5/13.
-//  Copyright © 2016年 lixiang. All rights reserved.
-//
+
 
 #import "RCTUmengShare.h"
-//#import "UMSocial.h"
-//#import "UMSocialWechatHandler.h"
-//#import "UMSocialQQHandler.h"
-//#import "UMSocialSinaSSOHandler.h"
 #import "RCTConvert.h"
 #import "RCTImageLoader.h"
 #import "RCTImageSource.h"
 #import "RCTConvert.h"
-//#import "WXApi.h"
+#import <UMSocialCore/UMSocialCore.h>
 
 static RCTUmengShare *_instance = nil;
 
@@ -61,7 +51,8 @@ RCT_EXPORT_MODULE()
 RCT_EXPORT_METHOD(setAppKey:(NSString*)appKey)
 {
     self.umengAppKey = appKey;
-//    [UMSocialData setAppKey:appKey];
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:appKey];
 }
 
 RCT_EXPORT_METHOD(setWXAppId:(NSString*)appId appSecret:(NSString*)appSecret url:(NSString*)url)
