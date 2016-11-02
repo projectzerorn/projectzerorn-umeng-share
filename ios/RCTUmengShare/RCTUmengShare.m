@@ -6,6 +6,7 @@
 #import "RCTImageSource.h"
 #import "RCTConvert.h"
 #import <UMSocialCore/UMSocialCore.h>
+#import "UMSocialUIManager.h"
 
 static RCTUmengShare *_instance = nil;
 
@@ -236,26 +237,77 @@ RCT_EXPORT_METHOD(setSinaData:(NSDictionary*)dic)
 //                                            }];
 }
 
-RCT_EXPORT_METHOD(presentSnsIconSheetView:(NSString*)content imageSource:(RCTImageSource*)imageSource)
+RCT_EXPORT_METHOD(showShareMenuView:(NSString*)title content:(NSString*)content imageSource:(RCTImageSource*)imageSource)
 {
-//    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:imageSource.imageURL.absoluteString]];
-//    [self.bridge.imageLoader loadImageWithURLRequest:urlRequest
-//                                            callback:^(NSError *error, UIImage *image) {
-//                                                UIImage* tempImage = image;
-//                                                if(error)
-//                                                {
-//                                                    tempImage = nil;
-//                                                }
-//                                                dispatch_async(dispatch_get_main_queue(), ^{
-//                                                    [UMSocialSnsService presentSnsIconSheetView:self.rootViewController
-//                                                                                         appKey:self.umengAppKey
-//                                                                                      shareText:content
-//                                                                                     shareImage:tempImage
-//                                                                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,UMShareToQQ,UMShareToQzone,UMShareToSina,UMShareToEmail,UMShareToSms]
-//                                                                                       delegate:nil];
-//                                                });
-//
-//                                            }];
+    NSURLRequest *urlRequest = imageSource.request;
+    [self.bridge.imageLoader loadImageWithURLRequest:urlRequest
+                                            callback:^(NSError *error, UIImage *image) {
+                                                UIImage* tempImage = image;
+                                                if(error)
+                                                {
+                                                    tempImage = nil;
+                                                }
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    //显示分享面板
+                                                    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMShareMenuSelectionView *shareSelectionView, UMSocialPlatformType platformType) {
+                                                        
+                                                        //创建分享消息对象
+                                                        UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+                                                        
+                                                        //创建网页内容对象
+                                                        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"分享标题" descr:@"分享内容描述" thumImage:[UIImage imageNamed:@"icon"]];
+                                                        //设置网页地址
+                                                        shareObject.webpageUrl =@"http://mobile.umeng.com/social";
+                                                        
+                                                        //分享消息对象设置分享内容对象
+                                                        messageObject.shareObject = shareObject;
+                                                        
+                                                        //调用分享接口
+                                                        [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+                                                            if (error) {
+                                                                NSLog(@"************Share fail with error %@*********",error);
+                                                            }else{
+                                                                if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                                                                    UMSocialShareResponse *resp = data;
+                                                                    //分享结果消息
+                                                                    NSLog(@"response message is %@",resp.message);
+                                                                    //第三方原始返回的数据
+                                                                    NSLog(@"response originalResponse data is %@",resp.originalResponse);
+                                                                    
+                                                                }else{
+                                                                    NSLog(@"response data is %@",data);
+                                                                }
+                                                            }
+                                                            [self alertWithError:error];
+                                                        }];
+                                                        
+                                                    }];
 
+                                                });
+
+                                            }];
+
+}
+
+- (void)alertWithError:(NSError *)error
+{
+    NSString *result = nil;
+    if (!error) {
+        result = [NSString stringWithFormat:@"Share succeed"];
+    }
+    else{
+        if (error) {
+            result = [NSString stringWithFormat:@"Share fail with error code: %d\n",(int)error.code];
+        }
+        else{
+            result = [NSString stringWithFormat:@"Share fail"];
+        }
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"share"
+                                                    message:result
+                                                   delegate:nil
+                                          cancelButtonTitle:NSLocalizedString(@"sure", @"确定")
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 @end
