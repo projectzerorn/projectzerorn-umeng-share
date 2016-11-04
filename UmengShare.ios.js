@@ -12,8 +12,8 @@ export default class UmengShare {
     }
 
     //iOS
-    static setQQWithAppId(appId, appSecret, url, supportWebView) {
-        umengClient.setQQWithAppId(appId, appSecret, url, supportWebView);
+    static setQQWithAppId(appId, appSecret, url) {
+        umengClient.setQQWithAppId(appId, appSecret, url);
     }
 
     static openNewSinaSSOWithAppKey(appKey, secret, url) {
@@ -68,8 +68,8 @@ export default class UmengShare {
         umengClient.presentSnsIconSheetView(content, resolveAssetSource(imageSource));
     }
 
-    static showShareMenuView(title, content, imageSource){
-        umengClient.showShareMenuView(title, content, resolveAssetSource(imageSource));
+    static showShareMenuView(title, content, url, imageSource){
+        umengClient.showShareMenuView(title, content, url, resolveAssetSource(imageSource));
     }
 }
 
