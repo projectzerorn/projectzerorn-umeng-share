@@ -1,22 +1,39 @@
-#osx
-.DS_*
-*.log
+# OSX
+#
+.DS_Store
 
-#xcode
-ios/RCTUmengShare.xcodeproj/xcuserdata
-ios/RCTUmengShare.xcodeproj/project.xcworkspace
-ios/Build
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
 
-#android
-android/build
-android/proguard-rules.pro
-*.iml
-android/gradlew
-android/gradlew.bat
-android/gradle
-android/local.properties
-
-#git
-.npmignore
-
+# Android/IJ
+#
 .idea
+.gradle
+local.properties
+*.iml
+
+#project temp
+bin/
+
+# node.js
+#
+node_modules/
+npm-debug.log
+
