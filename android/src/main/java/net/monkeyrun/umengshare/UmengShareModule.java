@@ -56,14 +56,15 @@ public class UmengShareModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void openShareAction(String content, String title, String url, ReadableMap imageSource) {
         final SHARE_MEDIA[] displaylist = new SHARE_MEDIA[]{
-                SHARE_MEDIA.SMS,
-                SHARE_MEDIA.EMAIL,
                 SHARE_MEDIA.WEIXIN,
                 SHARE_MEDIA.WEIXIN_CIRCLE,
                 SHARE_MEDIA.WEIXIN_FAVORITE,
                 SHARE_MEDIA.QQ,
                 SHARE_MEDIA.QZONE,
-                SHARE_MEDIA.SINA};
+                SHARE_MEDIA.SMS
+//                SHARE_MEDIA.EMAIL,
+//                SHARE_MEDIA.SINA
+        };
         final Activity tempActivity = this.getCurrentActivity();
         final Context tempContext = this.getReactApplicationContext();
         final String finalContent = content;

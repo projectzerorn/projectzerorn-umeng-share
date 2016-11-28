@@ -4,16 +4,15 @@ var resolveAssetSource = require('../react-native/Libraries/Image/resolveAssetSo
 
 export default class UmengShare{
 
-    // static setAppKey(value){
-    //     umengClient.setAppKey(value);
-    // }
+     static setAppKey(value){
+         //umengClient.setAppKey(value);//android无需代码设置
+     }
 
     static setWXAppId(appId,appSecret){
         umengClient.setWXAppId(appId,appSecret);
     }
 
-    //iOS
-    static setQQZone(appId,appSecret){
+    static setQQWithAppId(appId,appSecret){
       umengClient.setQQZone(appId,appSecret);
     }
 
@@ -26,4 +25,7 @@ export default class UmengShare{
         umengClient.openShareAction(content,title,url,resolveAssetSource(imageSource));
     }
 
+    static showShareMenuView(title, content, url, imageSource){
+        umengClient.openShareAction(content, title, url, resolveAssetSource(imageSource));
+    }
 }
