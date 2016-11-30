@@ -4,22 +4,19 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
-
 import com.facebook.common.util.UriUtil;
-import com.facebook.imagepipeline.request.*;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
-import com.umeng.socialize.*;
+import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
-
-import java.net.URLEncoder.*;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 
 import javax.annotation.Nullable;
 
@@ -81,7 +78,7 @@ public class UmengShareModule extends ReactContextBaseJavaModule {
                 public void run() {
                     // TODO Auto-generated method stub
                     try {
-                        UMImage image;
+                        final UMImage image;
                         if (imageUrl.contains("http://") || imageUrl.contains("https://")) {
                             image = new UMImage(tempActivity, Uri.encode(imageUrl, ALLOWED_URI_CHARS));
 
@@ -100,10 +97,25 @@ public class UmengShareModule extends ReactContextBaseJavaModule {
                             bitmap.recycle();
                         }
                         new ShareAction(tempActivity).setDisplayList(displaylist)
-                                .withText(finalContent)
-                                .withTitle(finaltitle)
-                                .withTargetUrl(finalurl)
-                                .withMedia(image)
+                                .setShareboardclickCallback(new ShareBoardlistener() {
+                                    @Override
+                                    public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+                                        if(share_media == SHARE_MEDIA.SMS){
+                                            new ShareAction(tempActivity).setDisplayList(displaylist)
+                                                    .setPlatform(share_media)
+                                                    .withText(String.format("%s%s%s", finaltitle,finalContent,finalurl))
+                                                    .share();
+                                        }else{
+                                            new ShareAction(tempActivity).setDisplayList(displaylist)
+                                                    .setPlatform(share_media)
+                                                    .withText(finalContent)
+                                                    .withTitle(finaltitle)
+                                                    .withTargetUrl(finalurl)
+                                                    .withMedia(image)
+                                                    .share();
+                                        }
+                                    }
+                                })
                                 .open();
                     } catch (Exception e) {
                         Log.e("友盟分享错误", e.toString());
