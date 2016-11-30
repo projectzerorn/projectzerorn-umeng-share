@@ -1,6 +1,6 @@
 #react-native-umeng-share
 ios版本：6.0.2
-android版本：
+android版本：6.1.0
 
 
 目前支持分享到：微信好友、微信朋友圈、微信收藏、QQ、QQ空间、微博、邮件、短信
