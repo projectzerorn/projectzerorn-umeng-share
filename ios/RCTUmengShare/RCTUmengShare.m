@@ -6,7 +6,7 @@
 #import "RCTImageSource.h"
 #import "RCTConvert.h"
 #import <UMSocialCore/UMSocialCore.h>
-#import "UMSocialUIManager.h"
+#import <UShareUI/UMSocialUIManager.h>
 
 static RCTUmengShare *_instance = nil;
 
@@ -285,7 +285,7 @@ RCT_EXPORT_METHOD(showShareMenuView:(NSString*)title content:(NSString*)content 
                                                 }
                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                     //显示分享面板
-                                                    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMShareMenuSelectionView *shareSelectionView, UMSocialPlatformType platformType) {
+                                                    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
                                                         
                                                         //创建分享消息对象
                                                         UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
