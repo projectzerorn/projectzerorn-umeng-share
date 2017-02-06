@@ -1,10 +1,10 @@
 
 
 #import "RCTUmengShare.h"
-#import "RCTConvert.h"
-#import "RCTImageLoader.h"
-#import "RCTImageSource.h"
-#import "RCTConvert.h"
+#import <React/RCTConvert.h>
+#import <React/RCTImageLoader.h>
+#import <React/RCTImageSource.h>
+#import <React/RCTConvert.h>
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UMSocialUIManager.h>
 
